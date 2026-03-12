@@ -1,0 +1,1408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Havenly — Premium Real Estate</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --navy:#0D1B2A;
+  --navy-mid:#1A2E44;
+  --navy-light:#243C55;
+  --gold:#C9A84C;
+  --gold-light:#E8C97A;
+  --gold-pale:#F9F3E3;
+  --cream:#FAF8F4;
+  --white:#FFFFFF;
+  --ink:#1A1A1A;
+  --mist:#8A9BB0;
+  --rule:#E2DDD6;
+  --rule-dark:rgba(255,255,255,0.1);
+  --shadow:0 4px 24px rgba(13,27,42,0.12);
+  --shadow-lg:0 16px 64px rgba(13,27,42,0.18);
+}
+
+html{scroll-behavior:smooth}
+body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);overflow-x:hidden}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:var(--cream)}
+::-webkit-scrollbar-thumb{background:var(--gold);border-radius:3px}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.1rem 5%;
+  transition:all 0.3s;
+}
+nav.scrolled{
+  background:rgba(13,27,42,0.97);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--rule-dark);
+  padding:0.85rem 5%;
+}
+.logo{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.7rem;font-weight:600;
+  color:var(--white);letter-spacing:0.02em;
+  text-decoration:none;display:flex;align-items:center;gap:0.4rem;
+}
+.logo-dot{
+  width:8px;height:8px;background:var(--gold);
+  border-radius:50%;display:inline-block;
+  margin-bottom:4px;
+}
+nav ul{display:flex;gap:2rem;list-style:none}
+nav ul a{
+  text-decoration:none;font-size:0.82rem;font-weight:500;
+  letter-spacing:0.08em;text-transform:uppercase;
+  color:rgba(255,255,255,0.65);transition:color 0.2s;
+}
+nav ul a:hover{color:var(--gold-light)}
+.nav-right{display:flex;align-items:center;gap:1rem}
+.btn{
+  font-family:'Outfit',sans-serif;font-weight:600;
+  font-size:0.8rem;letter-spacing:0.06em;text-transform:uppercase;
+  padding:0.65rem 1.5rem;border-radius:2px;cursor:pointer;
+  border:none;text-decoration:none;display:inline-flex;
+  align-items:center;gap:0.5rem;transition:all 0.22s;
+}
+.btn-gold{background:var(--gold);color:var(--navy)}
+.btn-gold:hover{background:var(--gold-light);transform:translateY(-1px)}
+.btn-outline-white{background:transparent;color:var(--white);border:1px solid rgba(255,255,255,0.35)}
+.btn-outline-white:hover{background:var(--white);color:var(--navy)}
+.btn-navy{background:var(--navy);color:var(--white)}
+.btn-navy:hover{background:var(--navy-mid)}
+.btn-outline-navy{background:transparent;color:var(--navy);border:1.5px solid var(--navy)}
+.btn-outline-navy:hover{background:var(--navy);color:var(--white)}
+.btn-sm{padding:0.5rem 1rem;font-size:0.72rem}
+
+/* HERO */
+.hero{
+  min-height:100vh;
+  background:linear-gradient(165deg, var(--navy) 0%, var(--navy-mid) 50%, #1E3A52 100%);
+  display:flex;flex-direction:column;justify-content:center;
+  padding:8rem 5% 5rem;position:relative;overflow:hidden;
+}
+.hero-bg-pattern{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px);
+  background-size:60px 60px;
+  pointer-events:none;
+}
+.hero-glow{
+  position:absolute;top:-20%;right:-10%;
+  width:700px;height:700px;
+  background:radial-gradient(circle, rgba(201,168,76,0.12) 0%, transparent 65%);
+  pointer-events:none;
+}
+.hero-glow2{
+  position:absolute;bottom:-20%;left:-5%;
+  width:500px;height:500px;
+  background:radial-gradient(circle, rgba(201,168,76,0.06) 0%, transparent 65%);
+  pointer-events:none;
+}
+.hero-content{max-width:750px;position:relative;z-index:1}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:0.75rem;
+  font-size:0.72rem;font-weight:500;letter-spacing:0.2em;
+  text-transform:uppercase;color:var(--gold);
+  margin-bottom:1.75rem;
+  animation:fadeUp 0.7s ease both;
+}
+.hero-eyebrow::before,.hero-eyebrow::after{
+  content:'';flex:1;min-width:24px;height:1px;background:var(--gold);opacity:0.5;
+}
+h1{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(3rem,6vw,5.5rem);
+  font-weight:300;line-height:1.05;
+  color:var(--white);letter-spacing:-0.01em;
+  margin-bottom:1.5rem;
+  animation:fadeUp 0.7s 0.1s ease both;
+}
+h1 em{font-style:italic;color:var(--gold-light)}
+h1 strong{font-weight:700}
+.hero-sub{
+  font-size:1rem;line-height:1.75;
+  color:rgba(255,255,255,0.5);
+  max-width:500px;margin-bottom:3rem;font-weight:300;
+  animation:fadeUp 0.7s 0.2s ease both;
+}
+.hero-actions{
+  display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:4rem;
+  animation:fadeUp 0.7s 0.3s ease both;
+}
+.hero-actions .btn{font-size:0.85rem;padding:0.85rem 2rem}
+.hero-stats{
+  display:flex;gap:3rem;
+  animation:fadeUp 0.7s 0.4s ease both;
+}
+.hero-stat{}
+.stat-n{
+  font-family:'Cormorant Garamond',serif;
+  font-size:2.2rem;font-weight:600;color:var(--white);
+  line-height:1;
+}
+.stat-n span{color:var(--gold)}
+.stat-l{font-size:0.72rem;text-transform:uppercase;letter-spacing:0.12em;color:rgba(255,255,255,0.4);margin-top:0.25rem}
+
+/* SEARCH BAR */
+.search-bar{
+  background:var(--white);
+  border-radius:4px;
+  padding:0.5rem 0.5rem 0.5rem 0;
+  display:flex;align-items:center;
+  box-shadow:var(--shadow-lg);
+  margin:0 5% -40px;
+  position:relative;z-index:10;
+  border:1px solid var(--rule);
+}
+.search-field{
+  flex:1;display:flex;align-items:center;
+  padding:0.75rem 1.5rem;
+  border-right:1px solid var(--rule);
+}
+.search-field:last-of-type{border-right:none}
+.search-field label{
+  font-size:0.62rem;text-transform:uppercase;
+  letter-spacing:0.1em;color:var(--mist);font-weight:600;
+  display:block;margin-bottom:0.25rem;
+}
+.search-field select,.search-field input{
+  font-family:'Outfit',sans-serif;
+  font-size:0.88rem;font-weight:500;color:var(--ink);
+  border:none;outline:none;background:transparent;
+  width:100%;cursor:pointer;
+}
+.search-bar .btn{margin-left:0.5rem;flex-shrink:0;font-size:0.82rem;padding:1rem 1.75rem}
+
+/* LISTINGS SECTION */
+.listings-section{
+  padding:7rem 5% 5rem;
+}
+.section-header{
+  display:flex;align-items:flex-end;justify-content:space-between;
+  margin-bottom:2.5rem;flex-wrap:wrap;gap:1rem;
+}
+.section-eyebrow{
+  font-size:0.68rem;font-weight:600;letter-spacing:0.18em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:0.6rem;
+}
+h2{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1.8rem,3vw,2.6rem);
+  font-weight:600;line-height:1.15;color:var(--navy);
+  letter-spacing:-0.01em;
+}
+h2 em{font-style:italic;color:var(--gold)}
+.filter-tabs{display:flex;gap:0.4rem;flex-wrap:wrap}
+.filter-tab{
+  font-family:'Outfit',sans-serif;
+  font-size:0.75rem;font-weight:500;letter-spacing:0.05em;
+  padding:0.45rem 1.1rem;border-radius:2px;cursor:pointer;
+  border:1.5px solid var(--rule);background:transparent;
+  color:var(--mist);transition:all 0.2s;
+}
+.filter-tab:hover,.filter-tab.active{
+  background:var(--navy);color:var(--white);border-color:var(--navy);
+}
+
+/* PROPERTY GRID */
+.props-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(320px,1fr));
+  gap:1.75rem;
+}
+.prop-card{
+  background:var(--white);border-radius:6px;
+  border:1px solid var(--rule);
+  overflow:hidden;cursor:pointer;
+  transition:transform 0.25s,box-shadow 0.25s;
+}
+.prop-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.prop-img{
+  height:220px;position:relative;overflow:hidden;
+  background:linear-gradient(135deg,var(--navy-mid),var(--navy-light));
+}
+.prop-img img{width:100%;height:100%;object-fit:cover;transition:transform 0.4s}
+.prop-card:hover .prop-img img{transform:scale(1.04)}
+.prop-img-placeholder{
+  width:100%;height:100%;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  color:rgba(255,255,255,0.2);font-size:3rem;gap:0.5rem;
+}
+.prop-img-placeholder span{font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase}
+.prop-badge{
+  position:absolute;top:1rem;left:1rem;
+  font-size:0.62rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;
+  padding:0.3rem 0.7rem;border-radius:2px;
+}
+.badge-sale{background:var(--gold);color:var(--navy)}
+.badge-rent{background:var(--navy);color:var(--white)}
+.badge-new{background:#16a34a;color:var(--white)}
+.badge-featured{background:rgba(201,168,76,0.9);color:var(--navy)}
+.prop-save{
+  position:absolute;top:1rem;right:1rem;
+  width:34px;height:34px;border-radius:50%;
+  background:rgba(255,255,255,0.9);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1rem;cursor:pointer;border:none;
+  transition:all 0.2s;color:var(--mist);
+}
+.prop-save:hover,.prop-save.saved{color:#e74c3c;background:var(--white)}
+.prop-body{padding:1.4rem}
+.prop-price{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.55rem;font-weight:700;color:var(--navy);
+  margin-bottom:0.3rem;line-height:1;
+}
+.prop-price span{font-size:0.85rem;font-weight:400;color:var(--mist)}
+.prop-title{
+  font-size:0.92rem;font-weight:600;color:var(--ink);
+  margin-bottom:0.3rem;line-height:1.4;
+}
+.prop-location{
+  display:flex;align-items:center;gap:0.35rem;
+  font-size:0.78rem;color:var(--mist);margin-bottom:1.1rem;
+}
+.prop-location svg{flex-shrink:0}
+.prop-divider{height:1px;background:var(--rule);margin-bottom:1.1rem}
+.prop-specs{display:flex;gap:1.25rem}
+.spec{display:flex;align-items:center;gap:0.4rem;font-size:0.78rem;color:var(--mist);font-weight:500}
+.spec-icon{font-size:0.9rem}
+.prop-agent{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-top:1rem;padding-top:1rem;border-top:1px solid var(--rule);
+}
+.agent-info{display:flex;align-items:center;gap:0.6rem}
+.agent-av{
+  width:30px;height:30px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:0.65rem;font-weight:700;color:var(--white);flex-shrink:0;
+}
+.agent-name{font-size:0.75rem;font-weight:600;color:var(--ink)}
+.agent-label{font-size:0.65rem;color:var(--mist);text-transform:uppercase;letter-spacing:0.06em}
+.prop-contact{font-size:0.72rem;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:var(--gold);cursor:pointer;background:none;border:none;transition:color 0.2s;font-family:'Outfit',sans-serif}
+.prop-contact:hover{color:var(--navy)}
+
+/* EMPTY STATE */
+.empty-state{
+  grid-column:1/-1;text-align:center;
+  padding:5rem 2rem;color:var(--mist);
+}
+.empty-icon{font-size:4rem;margin-bottom:1rem;opacity:0.4}
+.empty-state h3{font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--navy);margin-bottom:0.5rem}
+.empty-state p{font-size:0.9rem;margin-bottom:1.5rem}
+
+/* WHY US SECTION */
+.why-section{
+  background:var(--navy);padding:6rem 5%;
+}
+.why-section .section-eyebrow{color:var(--gold-light)}
+.why-section h2{color:var(--white)}
+.why-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:0;margin-top:3.5rem;
+  border:1px solid var(--rule-dark);border-radius:4px;overflow:hidden;
+}
+.why-cell{
+  padding:2.25rem;border-right:1px solid var(--rule-dark);
+  transition:background 0.2s;
+}
+.why-cell:last-child{border-right:none}
+.why-cell:hover{background:rgba(201,168,76,0.06)}
+.why-icon{font-size:1.75rem;margin-bottom:1.25rem}
+.why-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.1rem;font-weight:600;color:var(--white);
+  margin-bottom:0.6rem;
+}
+.why-desc{font-size:0.82rem;color:rgba(255,255,255,0.4);line-height:1.65;font-weight:300}
+
+/* CTA */
+.cta-section{
+  padding:7rem 5%;text-align:center;
+  background:var(--gold-pale);
+  border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
+  position:relative;overflow:hidden;
+}
+.cta-section::before{
+  content:'HAVENLY';
+  position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  font-family:'Cormorant Garamond',serif;
+  font-size:18vw;font-weight:700;color:rgba(201,168,76,0.08);
+  white-space:nowrap;pointer-events:none;
+  letter-spacing:-0.05em;
+}
+.cta-section .section-eyebrow{display:block;margin-bottom:0.75rem}
+.cta-section h2{margin-bottom:1rem}
+.cta-section p{font-size:1rem;color:var(--mist);max-width:480px;margin:0 auto 2.5rem;line-height:1.7;font-weight:300}
+.cta-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.cta-actions .btn{padding:0.9rem 2.25rem;font-size:0.85rem}
+
+/* FOOTER */
+footer{
+  background:var(--navy);color:var(--white);
+  padding:4rem 5% 2rem;
+  border-top:1px solid rgba(255,255,255,0.06);
+}
+.footer-top{
+  display:grid;grid-template-columns:2fr 1fr 1fr 1fr;
+  gap:3rem;margin-bottom:3rem;
+}
+.footer-brand .logo{display:block;margin-bottom:1rem;text-decoration:none;font-size:1.5rem}
+.footer-brand p{font-size:0.82rem;color:rgba(255,255,255,0.35);line-height:1.7;max-width:240px;font-weight:300}
+.footer-col h4{
+  font-size:0.65rem;font-weight:600;letter-spacing:0.15em;
+  text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:1.25rem;
+}
+.footer-col ul{list-style:none}
+.footer-col ul li{margin-bottom:0.6rem}
+.footer-col ul a{
+  font-size:0.82rem;color:rgba(255,255,255,0.5);
+  text-decoration:none;transition:color 0.2s;font-weight:300;
+}
+.footer-col ul a:hover{color:var(--gold-light)}
+.footer-bottom{
+  display:flex;align-items:center;justify-content:space-between;
+  padding-top:1.5rem;border-top:1px solid rgba(255,255,255,0.07);
+  font-size:0.75rem;color:rgba(255,255,255,0.25);
+}
+
+/* MODAL */
+.modal-overlay{
+  position:fixed;inset:0;z-index:500;
+  background:rgba(13,27,42,0.85);backdrop-filter:blur(8px);
+  display:flex;align-items:center;justify-content:center;
+  padding:1.5rem;opacity:0;pointer-events:none;transition:opacity 0.3s;
+}
+.modal-overlay.open{opacity:1;pointer-events:all}
+.modal{
+  background:var(--white);border-radius:8px;
+  width:100%;max-width:740px;max-height:90vh;
+  overflow-y:auto;
+  transform:translateY(20px);transition:transform 0.3s;
+}
+.modal-overlay.open .modal{transform:translateY(0)}
+.modal-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:2rem 2rem 1.5rem;
+  border-bottom:1px solid var(--rule);
+  position:sticky;top:0;background:var(--white);z-index:1;
+}
+.modal-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.6rem;font-weight:600;color:var(--navy);
+}
+.modal-close{
+  width:36px;height:36px;border-radius:50%;
+  background:var(--cream);border:none;cursor:pointer;
+  font-size:1.1rem;display:flex;align-items:center;justify-content:center;
+  color:var(--mist);transition:all 0.2s;
+}
+.modal-close:hover{background:var(--rule);color:var(--ink)}
+.modal-body{padding:2rem}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
+.form-group{display:flex;flex-direction:column;gap:0.45rem}
+.form-group.full{grid-column:1/-1}
+.form-label{
+  font-size:0.72rem;font-weight:600;letter-spacing:0.08em;
+  text-transform:uppercase;color:var(--mist);
+}
+.form-input,.form-select,.form-textarea{
+  font-family:'Outfit',sans-serif;font-size:0.88rem;
+  font-weight:400;color:var(--ink);
+  background:var(--cream);border:1.5px solid var(--rule);
+  border-radius:4px;padding:0.75rem 1rem;
+  outline:none;transition:border-color 0.2s,background 0.2s;
+  width:100%;
+}
+.form-input:focus,.form-select:focus,.form-textarea:focus{
+  border-color:var(--gold);background:var(--white);
+}
+.form-textarea{resize:vertical;min-height:90px;line-height:1.6}
+.form-section-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.05rem;font-weight:600;color:var(--navy);
+  margin:1.5rem 0 0.25rem;grid-column:1/-1;
+  padding-top:1.25rem;border-top:1px solid var(--rule);
+}
+.form-section-title:first-child{margin-top:0;padding-top:0;border-top:none}
+.img-upload-area{
+  grid-column:1/-1;
+  border:2px dashed var(--rule);border-radius:6px;
+  padding:2rem;text-align:center;cursor:pointer;
+  transition:border-color 0.2s,background 0.2s;background:var(--cream);
+}
+.img-upload-area:hover{border-color:var(--gold);background:var(--gold-pale)}
+.img-upload-area input[type=file]{display:none}
+.upload-icon{font-size:2rem;margin-bottom:0.5rem;color:var(--gold)}
+.upload-text{font-size:0.82rem;color:var(--mist);line-height:1.6}
+.upload-text strong{color:var(--ink)}
+.img-previews{
+  grid-column:1/-1;
+  display:flex;gap:0.75rem;flex-wrap:wrap;margin-top:0.5rem;
+}
+.img-preview{
+  width:80px;height:80px;border-radius:4px;
+  object-fit:cover;border:2px solid var(--rule);
+  position:relative;
+}
+.img-preview-wrap{position:relative;width:80px;height:80px}
+.img-remove{
+  position:absolute;top:-6px;right:-6px;
+  width:20px;height:20px;border-radius:50%;
+  background:var(--navy);color:var(--white);
+  border:none;cursor:pointer;font-size:0.6rem;
+  display:flex;align-items:center;justify-content:center;
+}
+.amenities-grid{
+  grid-column:1/-1;
+  display:flex;flex-wrap:wrap;gap:0.6rem;
+}
+.amenity-check{
+  display:flex;align-items:center;gap:0.5rem;
+  font-size:0.8rem;font-weight:500;color:var(--ink);
+  background:var(--cream);border:1.5px solid var(--rule);
+  padding:0.45rem 0.9rem;border-radius:3px;cursor:pointer;
+  transition:all 0.18s;user-select:none;
+}
+.amenity-check input{display:none}
+.amenity-check.checked{background:var(--navy);color:var(--white);border-color:var(--navy)}
+.modal-footer{
+  padding:1.5rem 2rem 2rem;
+  display:flex;align-items:center;justify-content:space-between;
+  border-top:1px solid var(--rule);gap:1rem;
+}
+.modal-footer .btn{padding:0.85rem 2rem;font-size:0.82rem}
+
+/* DETAIL MODAL */
+.detail-modal{max-width:860px}
+.detail-img{
+  height:340px;background:linear-gradient(135deg,var(--navy-mid),var(--navy-light));
+  position:relative;overflow:hidden;
+}
+.detail-img img{width:100%;height:100%;object-fit:cover}
+.detail-img-placeholder{
+  width:100%;height:100%;display:flex;align-items:center;justify-content:center;
+  font-size:5rem;color:rgba(255,255,255,0.15);
+}
+.detail-badges{
+  position:absolute;top:1.25rem;left:1.25rem;display:flex;gap:0.5rem;
+}
+.detail-body{padding:2rem}
+.detail-header{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:1.5rem;flex-wrap:wrap}
+.detail-price{
+  font-family:'Cormorant Garamond',serif;
+  font-size:2.2rem;font-weight:700;color:var(--navy);line-height:1;
+}
+.detail-price small{font-size:1rem;font-weight:400;color:var(--mist)}
+.detail-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.4rem;font-weight:600;color:var(--ink);margin:0.3rem 0;
+}
+.detail-loc{font-size:0.85rem;color:var(--mist);display:flex;align-items:center;gap:0.3rem}
+.detail-specs-row{
+  display:flex;gap:2rem;flex-wrap:wrap;
+  padding:1.25rem;background:var(--cream);border-radius:4px;
+  margin:1.25rem 0;border:1px solid var(--rule);
+}
+.detail-spec{text-align:center}
+.detail-spec-n{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.5rem;font-weight:700;color:var(--navy);line-height:1;
+}
+.detail-spec-l{font-size:0.68rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--mist);margin-top:0.25rem}
+.detail-desc{font-size:0.9rem;line-height:1.75;color:#555;font-weight:300;margin-bottom:1.5rem}
+.detail-amenities{display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:1.5rem}
+.detail-amenity{
+  font-size:0.75rem;font-weight:500;
+  padding:0.35rem 0.8rem;
+  background:var(--gold-pale);color:var(--navy);
+  border-radius:3px;border:1px solid rgba(201,168,76,0.3);
+}
+.detail-agent-box{
+  display:flex;align-items:center;gap:1rem;
+  padding:1.25rem;background:var(--cream);
+  border-radius:4px;border:1px solid var(--rule);
+}
+.detail-agent-av{
+  width:52px;height:52px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1rem;font-weight:700;color:var(--white);flex-shrink:0;
+}
+.detail-agent-name{font-weight:600;font-size:0.92rem;color:var(--ink);margin-bottom:0.15rem}
+.detail-agent-role{font-size:0.72rem;color:var(--mist);text-transform:uppercase;letter-spacing:0.08em}
+.detail-agent-actions{margin-left:auto;display:flex;gap:0.6rem}
+
+/* TOAST */
+.toast{
+  position:fixed;bottom:2rem;right:2rem;z-index:999;
+  background:var(--navy);color:var(--white);
+  padding:1rem 1.5rem;border-radius:4px;
+  display:flex;align-items:center;gap:0.75rem;
+  font-size:0.85rem;font-weight:500;
+  box-shadow:var(--shadow-lg);
+  transform:translateY(80px);opacity:0;
+  transition:all 0.35s cubic-bezier(0.34,1.56,0.64,1);
+}
+.toast.show{transform:translateY(0);opacity:1}
+.toast-icon{font-size:1.1rem}
+.toast-close{
+  margin-left:0.5rem;background:none;border:none;color:rgba(255,255,255,0.5);
+  cursor:pointer;font-size:1rem;display:flex;align-items:center;
+}
+
+/* ANIMATIONS */
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(24px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.reveal{
+  opacity:0;transform:translateY(28px);
+  transition:opacity 0.6s ease,transform 0.6s ease;
+}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* MOBILE */
+@media(max-width:900px){
+  nav ul,.nav-right .btn-outline-white{display:none}
+  .why-grid{grid-template-columns:1fr 1fr}
+  .why-cell{border-bottom:1px solid var(--rule-dark)}
+  .footer-top{grid-template-columns:1fr 1fr}
+  .search-bar{flex-direction:column;margin:0 5% -20px;padding:1rem}
+  .search-field{border-right:none;border-bottom:1px solid var(--rule);padding:0.75rem 0}
+  .search-field:last-of-type{border-bottom:none}
+  .form-grid{grid-template-columns:1fr}
+  .form-group.full,.form-section-title,.img-upload-area,.img-previews,.amenities-grid{grid-column:1/-1}
+}
+@media(max-width:600px){
+  .why-grid{grid-template-columns:1fr}
+  .hero-stats{gap:1.5rem}
+  .footer-top{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- TOAST -->
+<div class="toast" id="toast">
+  <span class="toast-icon">✓</span>
+  <span id="toastMsg">Property listed successfully!</span>
+  <button class="toast-close" onclick="closeToast()">✕</button>
+</div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="logo"><span class="logo-dot"></span>Havenly</a>
+  <ul>
+    <li><a href="#listings">Listings</a></li>
+    <li><a href="#why">Why Us</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="#" class="btn btn-outline-white btn-sm">Sign In</a>
+    <button class="btn btn-gold btn-sm" onclick="openPostModal()">+ List Property</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-pattern"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Premium Real Estate</div>
+    <h1>Find the home<br>you've <em>always</em><br><strong>deserved.</strong></h1>
+    <p class="hero-sub">Discover exceptional properties across Nigeria's finest locations. Buy, sell, or rent with confidence — every listing verified.</p>
+    <div class="hero-actions">
+      <button class="btn btn-gold" onclick="scrollTo({top:document.getElementById('listings').offsetTop-80,behavior:'smooth'})">Browse Listings</button>
+      <button class="btn btn-outline-white" onclick="openPostModal()">+ Post Your Property</button>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="stat-n" id="statListings">0<span>+</span></div>
+        <div class="stat-l">Active Listings</div>
+      </div>
+      <div class="hero-stat">
+        <div class="stat-n">2,400<span>+</span></div>
+        <div class="stat-l">Happy Clients</div>
+      </div>
+      <div class="hero-stat">
+        <div class="stat-n">12<span>+</span></div>
+        <div class="stat-l">Cities Covered</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SEARCH BAR -->
+<div class="search-bar">
+  <div class="search-field">
+    <label>Location</label>
+    <input type="text" id="searchLocation" placeholder="City, state or area…">
+  </div>
+  <div class="search-field">
+    <label>Type</label>
+    <select id="searchType">
+      <option value="">All Types</option>
+      <option>House</option>
+      <option>Apartment</option>
+      <option>Land</option>
+      <option>Commercial</option>
+      <option>Duplex</option>
+    </select>
+  </div>
+  <div class="search-field">
+    <label>Listing</label>
+    <select id="searchListing">
+      <option value="">For Sale & Rent</option>
+      <option>For Sale</option>
+      <option>For Rent</option>
+    </select>
+  </div>
+  <div class="search-field">
+    <label>Budget (₦)</label>
+    <select id="searchBudget">
+      <option value="">Any Price</option>
+      <option value="5000000">Under ₦5M</option>
+      <option value="20000000">Under ₦20M</option>
+      <option value="50000000">Under ₦50M</option>
+      <option value="100000000">Under ₦100M</option>
+    </select>
+  </div>
+  <button class="btn btn-gold" onclick="applyFilters()">🔍 Search</button>
+</div>
+
+<!-- LISTINGS -->
+<section class="listings-section" id="listings">
+  <div class="section-header reveal">
+    <div>
+      <div class="section-eyebrow">Available Properties</div>
+      <h2>Featured <em>Listings</em></h2>
+    </div>
+    <div class="filter-tabs">
+      <button class="filter-tab active" onclick="filterTab(this,'all')">All</button>
+      <button class="filter-tab" onclick="filterTab(this,'sale')">For Sale</button>
+      <button class="filter-tab" onclick="filterTab(this,'rent')">For Rent</button>
+      <button class="filter-tab" onclick="filterTab(this,'new')">New</button>
+    </div>
+  </div>
+  <div class="props-grid" id="propsGrid">
+    <!-- Populated by JS -->
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="why-section" id="why">
+  <div class="reveal">
+    <div class="section-eyebrow">Why Havenly</div>
+    <h2 style="color:var(--white)">Built for how <em>Nigerians</em><br>buy and sell property</h2>
+  </div>
+  <div class="why-grid reveal">
+    <div class="why-cell">
+      <div class="why-icon">🏛️</div>
+      <div class="why-title">Verified Listings</div>
+      <p class="why-desc">Every property on Havenly is manually reviewed. No ghost addresses, no misleading photos. What you see is what you get.</p>
+    </div>
+    <div class="why-cell">
+      <div class="why-icon">📍</div>
+      <div class="why-title">Nationwide Coverage</div>
+      <p class="why-desc">From Lagos Island to Abuja Central, Port Harcourt to Enugu — the most comprehensive property database in Nigeria.</p>
+    </div>
+    <div class="why-cell">
+      <div class="why-icon">🤝</div>
+      <div class="why-title">Trusted Agents</div>
+      <p class="why-desc">Our agents are licensed, background-checked, and held to strict conduct standards. Your peace of mind is our priority.</p>
+    </div>
+    <div class="why-cell">
+      <div class="why-icon">⚡</div>
+      <div class="why-title">Fast & Free to Post</div>
+      <p class="why-desc">List your property for free in under 5 minutes. Your listing goes live immediately and reaches thousands of active buyers.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <span class="section-eyebrow">Sell or Rent Faster</span>
+  <h2>Your property deserves<br>the right <em>audience</em></h2>
+  <p>Post your listing today and connect with thousands of verified buyers and renters across Nigeria. Free, fast, and effective.</p>
+  <div class="cta-actions">
+    <button class="btn btn-gold" onclick="openPostModal()">+ Post a Property</button>
+    <a href="tel:+2348000000000" class="btn btn-outline-navy">📞 Talk to an Agent</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="#" class="logo"><span class="logo-dot"></span>Havenly</a>
+      <p>Nigeria's most trusted real estate platform. Buy, sell, and rent premium properties with confidence.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Explore</h4>
+      <ul>
+        <li><a href="#">Buy Property</a></li>
+        <li><a href="#">Rent Property</a></li>
+        <li><a href="#">New Developments</a></li>
+        <li><a href="#">Commercial</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#">About Havenly</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Press</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Support</h4>
+      <ul>
+        <li><a href="#">Help Center</a></li>
+        <li><a href="#">Contact Us</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Havenly Real Estate. All rights reserved.</span>
+    <span>🇳🇬 Made for Nigeria</span>
+  </div>
+</footer>
+
+<!-- POST PROPERTY MODAL -->
+<div class="modal-overlay" id="postModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">List Your Property</div>
+      <button class="modal-close" onclick="closePostModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <div class="form-section-title">Property Details</div>
+
+        <div class="form-group full">
+          <label class="form-label">Property Title *</label>
+          <input class="form-input" id="fTitle" placeholder="e.g. 4 Bedroom Duplex in Lekki Phase 1" maxlength="80">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Property Type *</label>
+          <select class="form-select" id="fType">
+            <option value="">Select type…</option>
+            <option>House</option>
+            <option>Apartment</option>
+            <option>Duplex</option>
+            <option>Bungalow</option>
+            <option>Land</option>
+            <option>Commercial</option>
+            <option>Office Space</option>
+            <option>Warehouse</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Listing Type *</label>
+          <select class="form-select" id="fListing">
+            <option value="">Select…</option>
+            <option>For Sale</option>
+            <option>For Rent</option>
+            <option>Short Let</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Price (₦) *</label>
+          <input class="form-input" id="fPrice" type="number" placeholder="e.g. 45000000" min="0">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Negotiable?</label>
+          <select class="form-select" id="fNeg">
+            <option>Yes, negotiable</option>
+            <option>Fixed price</option>
+          </select>
+        </div>
+
+        <div class="form-section-title">Location</div>
+
+        <div class="form-group">
+          <label class="form-label">State *</label>
+          <select class="form-select" id="fState">
+            <option value="">Select state…</option>
+            <option>Lagos</option><option>Abuja (FCT)</option><option>Rivers</option>
+            <option>Oyo</option><option>Kano</option><option>Delta</option>
+            <option>Anambra</option><option>Enugu</option><option>Ogun</option>
+            <option>Edo</option><option>Kaduna</option><option>Other</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">City / Area *</label>
+          <input class="form-input" id="fCity" placeholder="e.g. Lekki Phase 1">
+        </div>
+
+        <div class="form-group full">
+          <label class="form-label">Full Address</label>
+          <input class="form-input" id="fAddress" placeholder="Street address (optional)">
+        </div>
+
+        <div class="form-section-title">Specifications</div>
+
+        <div class="form-group">
+          <label class="form-label">Bedrooms</label>
+          <select class="form-select" id="fBeds">
+            <option value="0">Studio / N/A</option>
+            <option value="1">1 Bedroom</option>
+            <option value="2">2 Bedrooms</option>
+            <option value="3">3 Bedrooms</option>
+            <option value="4">4 Bedrooms</option>
+            <option value="5">5 Bedrooms</option>
+            <option value="6">6+ Bedrooms</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Bathrooms</label>
+          <select class="form-select" id="fBaths">
+            <option value="0">N/A</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5+</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Parking Spaces</label>
+          <select class="form-select" id="fParking">
+            <option value="0">None</option>
+            <option value="1">1 Space</option>
+            <option value="2">2 Spaces</option>
+            <option value="3">3+ Spaces</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Size (sqm)</label>
+          <input class="form-input" id="fSize" type="number" placeholder="e.g. 240">
+        </div>
+
+        <div class="form-section-title">Amenities</div>
+        <div class="amenities-grid" id="amenitiesGrid"></div>
+
+        <div class="form-section-title">Description & Photos</div>
+
+        <div class="form-group full">
+          <label class="form-label">Property Description</label>
+          <textarea class="form-textarea" id="fDesc" placeholder="Describe the property — features, condition, surroundings, access…" style="min-height:110px"></textarea>
+        </div>
+
+        <div class="form-group full">
+          <label class="form-label">Upload Photos</label>
+          <div class="img-upload-area" onclick="document.getElementById('fPhotos').click()" id="uploadArea">
+            <input type="file" id="fPhotos" accept="image/*" multiple onchange="handlePhotos(this)">
+            <div class="upload-icon">📸</div>
+            <p class="upload-text"><strong>Click to upload photos</strong><br>JPG, PNG, WEBP — up to 10 images</p>
+          </div>
+          <div class="img-previews" id="imgPreviews"></div>
+        </div>
+
+        <div class="form-section-title">Contact Information</div>
+
+        <div class="form-group">
+          <label class="form-label">Your Name *</label>
+          <input class="form-input" id="fName" placeholder="Full name">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Phone Number *</label>
+          <input class="form-input" id="fPhone" placeholder="e.g. 08012345678" type="tel">
+        </div>
+
+        <div class="form-group full">
+          <label class="form-label">Email Address</label>
+          <input class="form-input" id="fEmail" placeholder="your@email.com" type="email">
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline-navy" onclick="closePostModal()">Cancel</button>
+      <button class="btn btn-gold" onclick="submitListing()">🏠 Publish Listing</button>
+    </div>
+  </div>
+</div>
+
+<!-- PROPERTY DETAIL MODAL -->
+<div class="modal-overlay" id="detailModal">
+  <div class="modal detail-modal">
+    <div id="detailContent"></div>
+  </div>
+</div>
+
+<script>
+// ─── DATA ───────────────────────────────────────────────
+const AMENITY_OPTIONS = [
+  'Swimming Pool','Generator','Fitted Kitchen','Air Conditioning','Gym',
+  'Security / Gate','CCTV','Boys Quarter','Wardrobe','Garden',
+  'Tiled Floors','Water Treatment','Solar Power','Elevator','Waterfront View'
+];
+
+const AGENT_COLORS = ['#2D6A4F','#C9A84C','#3A5A8A','#6B3FA0','#c0392b','#1A6B4A'];
+const EMOJIS = { House:'🏠', Apartment:'🏢', Duplex:'🏘️', Bungalow:'🏡', Land:'🏞️', Commercial:'🏬', 'Office Space':'🏛️', Warehouse:'🏭' };
+
+const SEED = [
+  {
+    id:'s1',title:'Modern 4-Bedroom Duplex',type:'Duplex',listing:'For Sale',
+    price:85000000,city:'Lekki Phase 1',state:'Lagos',
+    beds:4,baths:4,parking:2,size:320,
+    desc:'Exquisite duplex in the heart of Lekki Phase 1. Features a contemporary design with high ceilings, imported tiles, fitted kitchen, 24hr security, and excellent road access.',
+    amenities:['Swimming Pool','Generator','Fitted Kitchen','Air Conditioning','Security / Gate','CCTV','Boys Quarter'],
+    name:'Emeka Okonkwo',phone:'08031234567',email:'emeka@email.com',
+    imgs:[],isNew:true,saved:false,date:new Date().toISOString()
+  },
+  {
+    id:'s2',title:'2 Bedroom Apartment — Furnished',type:'Apartment',listing:'For Rent',
+    price:3500000,city:'Wuse 2',state:'Abuja (FCT)',
+    beds:2,baths:2,parking:1,size:120,
+    desc:'Fully furnished 2-bedroom apartment in the prestigious Wuse 2. Modern finishes, backup power, and walking distance to major amenities.',
+    amenities:['Generator','Fitted Kitchen','Air Conditioning','Wardrobe','Tiled Floors'],
+    name:'Fatima Aliyu',phone:'08055678901',email:'',
+    imgs:[],isNew:true,saved:false,date:new Date().toISOString()
+  },
+  {
+    id:'s3',title:'Commercial Land — 2 Plots',type:'Land',listing:'For Sale',
+    price:120000000,city:'Trans Amadi',state:'Rivers',
+    beds:0,baths:0,parking:0,size:900,
+    desc:'Prime commercial land in the Trans Amadi industrial area. C of O available. Ideal for warehousing, light manufacturing, or office development.',
+    amenities:['Security / Gate'],
+    name:'Chidi Nwosu',phone:'08071122334',email:'chidi@nwosu.com',
+    imgs:[],isNew:false,saved:false,date:new Date(Date.now()-86400000*3).toISOString()
+  },
+  {
+    id:'s4',title:'5 Bedroom Mansion with Pool',type:'House',listing:'For Sale',
+    price:250000000,city:'Asokoro',state:'Abuja (FCT)',
+    beds:5,baths:6,parking:3,size:680,
+    desc:'Grand mansion in Asokoro with a private pool, cinema room, gym, and lush landscaped gardens. Perfect for a discerning executive family.',
+    amenities:['Swimming Pool','Generator','Fitted Kitchen','Air Conditioning','Gym','Security / Gate','CCTV','Boys Quarter','Wardrobe','Garden','Solar Power','Elevator'],
+    name:'Aisha Mohammed',phone:'08090011223',email:'aisha.m@gmail.com',
+    imgs:[],isNew:false,saved:false,date:new Date(Date.now()-86400000*7).toISOString()
+  },
+  {
+    id:'s5',title:'3 Bedroom Bungalow — Corner Piece',type:'Bungalow',listing:'For Sale',
+    price:32000000,city:'Magodo GRA',state:'Lagos',
+    beds:3,baths:3,parking:2,size:210,
+    desc:'Well-maintained corner-piece bungalow in Magodo GRA. Serene environment, good road network, proximity to schools and shopping centres.',
+    amenities:['Generator','Boys Quarter','Garden','Tiled Floors','Water Treatment'],
+    name:'Tobi Adeyemi',phone:'08061234567',email:'',
+    imgs:[],isNew:false,saved:false,date:new Date(Date.now()-86400000*14).toISOString()
+  },
+  {
+    id:'s6',title:'Studio Apartment — Short Let',type:'Apartment',listing:'Short Let',
+    price:150000,city:'Victoria Island',state:'Lagos',
+    beds:0,baths:1,parking:0,size:55,
+    desc:'Stylish studio on Victoria Island, available for short-let. Fully serviced with WiFi, DSTV, and 24hr power. Walking distance to bars and restaurants.',
+    amenities:['Generator','Air Conditioning','CCTV','Tiled Floors'],
+    name:'Ngozi Eze',phone:'08022334455',email:'ngozi.eze@shortlet.ng',
+    imgs:[],isNew:true,saved:false,date:new Date(Date.now()-86400000).toISOString()
+  }
+];
+
+// ─── STATE ───────────────────────────────────────────────
+let properties = JSON.parse(localStorage.getItem('havenly_props') || 'null') || [...SEED];
+let uploadedImgs = [];
+let checkedAmenities = new Set();
+let currentFilter = 'all';
+let currentSearch = {};
+
+function saveProps() {
+  // Save only non-img data to avoid quota issues
+  const safe = properties.map(p => ({...p, imgs:[]}));
+  try { localStorage.setItem('havenly_props', JSON.stringify(safe)); } catch(e){}
+}
+
+// ─── RENDER ───────────────────────────────────────────────
+function formatPrice(p, listing) {
+  const f = n => {
+    if(n >= 1e9) return '₦' + (n/1e9).toFixed(1) + 'B';
+    if(n >= 1e6) return '₦' + (n/1e6).toFixed(1) + 'M';
+    if(n >= 1e3) return '₦' + (n/1e3).toFixed(0) + 'K';
+    return '₦' + n.toLocaleString();
+  };
+  const s = listing === 'For Rent' ? '/yr' : listing === 'Short Let' ? '/night' : '';
+  return f(p) + (s ? `<span>${s}</span>` : '');
+}
+
+function getInitials(name) {
+  return name.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);
+}
+
+function agentColor(name) {
+  let h = 0;
+  for(let c of name) h = (h*31 + c.charCodeAt(0)) & 0xFFFF;
+  return AGENT_COLORS[h % AGENT_COLORS.length];
+}
+
+function renderCard(p) {
+  const badgeCls = p.listing === 'For Sale' ? 'badge-sale' : p.listing === 'For Rent' ? 'badge-rent' : 'badge-featured';
+  const emoji = EMOJIS[p.type] || '🏠';
+  const loc = [p.city, p.state].filter(Boolean).join(', ');
+  const initials = getInitials(p.name);
+  const color = agentColor(p.name);
+
+  const imgHtml = p.imgs && p.imgs.length > 0
+    ? `<img src="${p.imgs[0]}" alt="${p.title}">`
+    : `<div class="prop-img-placeholder">${emoji}<span>${p.type}</span></div>`;
+
+  return `
+  <div class="prop-card" onclick="openDetail('${p.id}')">
+    <div class="prop-img">
+      ${imgHtml}
+      <span class="prop-badge ${badgeCls}">${p.listing}</span>
+      ${p.isNew ? '<span class="prop-badge badge-new" style="left:auto;right:1rem">New</span>' : ''}
+      <button class="prop-save ${p.saved?'saved':''}" onclick="toggleSave(event,'${p.id}')">${p.saved?'❤️':'🤍'}</button>
+    </div>
+    <div class="prop-body">
+      <div class="prop-price">${formatPrice(p.price, p.listing)}</div>
+      <div class="prop-title">${p.title}</div>
+      <div class="prop-location">
+        <svg width="11" height="14" viewBox="0 0 11 14" fill="none"><path d="M5.5 0C3.01 0 1 2.01 1 4.5c0 3.37 4.5 9.5 4.5 9.5s4.5-6.13 4.5-9.5C10 2.01 7.99 0 5.5 0zm0 6.1a1.6 1.6 0 110-3.2 1.6 1.6 0 010 3.2z" fill="#8A9BB0"/></svg>
+        ${loc}
+      </div>
+      <div class="prop-divider"></div>
+      <div class="prop-specs">
+        ${p.beds > 0 ? `<span class="spec"><span class="spec-icon">🛏</span>${p.beds} Bed${p.beds>1?'s':''}</span>` : ''}
+        ${p.baths > 0 ? `<span class="spec"><span class="spec-icon">🚿</span>${p.baths} Bath${p.baths>1?'s':''}</span>` : ''}
+        ${p.size ? `<span class="spec"><span class="spec-icon">📐</span>${p.size}sqm</span>` : ''}
+        ${p.parking > 0 ? `<span class="spec"><span class="spec-icon">🚗</span>${p.parking}</span>` : ''}
+      </div>
+      <div class="prop-agent">
+        <div class="agent-info">
+          <div class="agent-av" style="background:${color}">${initials}</div>
+          <div>
+            <div class="agent-name">${p.name}</div>
+            <div class="agent-label">Agent</div>
+          </div>
+        </div>
+        <button class="prop-contact" onclick="event.stopPropagation();contactAgent('${p.id}')">Contact →</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+function renderGrid() {
+  const grid = document.getElementById('propsGrid');
+  let list = [...properties];
+
+  if(currentFilter === 'sale') list = list.filter(p => p.listing === 'For Sale');
+  else if(currentFilter === 'rent') list = list.filter(p => p.listing === 'For Rent' || p.listing === 'Short Let');
+  else if(currentFilter === 'new') list = list.filter(p => p.isNew);
+
+  if(currentSearch.location) {
+    const q = currentSearch.location.toLowerCase();
+    list = list.filter(p => (p.city+' '+p.state).toLowerCase().includes(q));
+  }
+  if(currentSearch.type) list = list.filter(p => p.type === currentSearch.type);
+  if(currentSearch.listing) list = list.filter(p => p.listing === currentSearch.listing);
+  if(currentSearch.budget) list = list.filter(p => p.price <= currentSearch.budget);
+
+  if(list.length === 0) {
+    grid.innerHTML = `
+    <div class="empty-state">
+      <div class="empty-icon">🏚️</div>
+      <h3>No properties found</h3>
+      <p>Try adjusting your search filters, or be the first to list here!</p>
+      <button class="btn btn-gold" onclick="openPostModal()">+ Post a Property</button>
+    </div>`;
+  } else {
+    grid.innerHTML = list.map(renderCard).join('');
+  }
+
+  document.getElementById('statListings').innerHTML = properties.length + '<span>+</span>';
+}
+
+function filterTab(el, type) {
+  document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  currentFilter = type;
+  renderGrid();
+}
+
+function applyFilters() {
+  currentSearch = {
+    location: document.getElementById('searchLocation').value.trim(),
+    type: document.getElementById('searchType').value,
+    listing: document.getElementById('searchListing').value,
+    budget: parseInt(document.getElementById('searchBudget').value) || 0
+  };
+  document.getElementById('listings').scrollIntoView({behavior:'smooth',block:'start'});
+  renderGrid();
+}
+
+// ─── SAVE ────────────────────────────────────────────────
+function toggleSave(e, id) {
+  e.stopPropagation();
+  const p = properties.find(x => x.id === id);
+  if(p) {
+    p.saved = !p.saved;
+    saveProps();
+    renderGrid();
+    showToast(p.saved ? '❤️ Saved to favourites' : 'Removed from favourites');
+  }
+}
+
+// ─── DETAIL MODAL ────────────────────────────────────────
+function openDetail(id) {
+  const p = properties.find(x => x.id === id);
+  if(!p) return;
+  const color = agentColor(p.name);
+  const initials = getInitials(p.name);
+  const emoji = EMOJIS[p.type] || '🏠';
+  const loc = [p.city, p.state].filter(Boolean).join(', ');
+  const badgeCls = p.listing==='For Sale'?'badge-sale':p.listing==='For Rent'?'badge-rent':'badge-featured';
+
+  const imgHtml = p.imgs && p.imgs.length > 0
+    ? `<img src="${p.imgs[0]}" alt="${p.title}">`
+    : `<div class="detail-img-placeholder">${emoji}</div>`;
+
+  document.getElementById('detailContent').innerHTML = `
+    <div class="detail-img">
+      ${imgHtml}
+      <div class="detail-badges">
+        <span class="prop-badge ${badgeCls}">${p.listing}</span>
+        ${p.isNew ? '<span class="prop-badge badge-new">New</span>' : ''}
+      </div>
+    </div>
+    <div class="modal-header" style="position:sticky;top:0;background:var(--white);z-index:1">
+      <div style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;color:var(--navy)">${p.type} · ${p.city}</div>
+      <button class="modal-close" onclick="closeDetailModal()">✕</button>
+    </div>
+    <div class="detail-body">
+      <div class="detail-header">
+        <div>
+          <div class="detail-title">${p.title}</div>
+          <div class="detail-loc">📍 ${loc}${p.address ? ' — '+p.address : ''}</div>
+        </div>
+        <div>
+          <div class="detail-price">${formatPrice(p.price, p.listing)}</div>
+        </div>
+      </div>
+
+      <div class="detail-specs-row">
+        ${p.beds > 0 ? `<div class="detail-spec"><div class="detail-spec-n">${p.beds}</div><div class="detail-spec-l">Bedroom${p.beds>1?'s':''}</div></div>` : ''}
+        ${p.baths > 0 ? `<div class="detail-spec"><div class="detail-spec-n">${p.baths}</div><div class="detail-spec-l">Bathroom${p.baths>1?'s':''}</div></div>` : ''}
+        ${p.size ? `<div class="detail-spec"><div class="detail-spec-n">${p.size}</div><div class="detail-spec-l">sqm</div></div>` : ''}
+        ${p.parking > 0 ? `<div class="detail-spec"><div class="detail-spec-n">${p.parking}</div><div class="detail-spec-l">Parking</div></div>` : ''}
+      </div>
+
+      ${p.desc ? `<p class="detail-desc">${p.desc}</p>` : ''}
+
+      ${p.amenities && p.amenities.length > 0 ? `
+      <div style="margin-bottom:0.5rem;font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--mist)">Amenities</div>
+      <div class="detail-amenities">${p.amenities.map(a=>`<span class="detail-amenity">✓ ${a}</span>`).join('')}</div>
+      ` : ''}
+
+      <div class="detail-agent-box">
+        <div class="detail-agent-av" style="background:${color}">${initials}</div>
+        <div>
+          <div class="detail-agent-name">${p.name}</div>
+          <div class="detail-agent-role">Property Agent</div>
+          ${p.email ? `<div style="font-size:0.75rem;color:var(--mist);margin-top:0.15rem">${p.email}</div>` : ''}
+        </div>
+        <div class="detail-agent-actions">
+          <a href="tel:${p.phone}" class="btn btn-gold btn-sm">📞 ${p.phone}</a>
+          ${p.email ? `<a href="mailto:${p.email}" class="btn btn-outline-navy btn-sm">✉ Email</a>` : ''}
+        </div>
+      </div>
+    </div>`;
+
+  document.getElementById('detailModal').classList.add('open');
+}
+
+function closeDetailModal() {
+  document.getElementById('detailModal').classList.remove('open');
+}
+
+function contactAgent(id) {
+  openDetail(id);
+}
+
+// ─── POST MODAL ──────────────────────────────────────────
+function buildAmenities() {
+  const grid = document.getElementById('amenitiesGrid');
+  grid.innerHTML = AMENITY_OPTIONS.map(a => `
+    <label class="amenity-check" onclick="toggleAmenity(this,'${a}')">
+      <input type="checkbox" value="${a}"> ${a}
+    </label>`).join('');
+}
+
+function toggleAmenity(el, val) {
+  el.classList.toggle('checked');
+  if(checkedAmenities.has(val)) checkedAmenities.delete(val);
+  else checkedAmenities.add(val);
+}
+
+function openPostModal() {
+  resetForm();
+  buildAmenities();
+  document.getElementById('postModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closePostModal() {
+  document.getElementById('postModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function resetForm() {
+  ['fTitle','fType','fListing','fPrice','fNeg','fState','fCity','fAddress',
+   'fBeds','fBaths','fParking','fSize','fDesc','fName','fPhone','fEmail']
+    .forEach(id => {
+      const el = document.getElementById(id);
+      if(el) el.value = '';
+    });
+  uploadedImgs = [];
+  checkedAmenities = new Set();
+  document.getElementById('imgPreviews').innerHTML = '';
+}
+
+function handlePhotos(input) {
+  const files = Array.from(input.files);
+  files.slice(0, 10 - uploadedImgs.length).forEach(file => {
+    const reader = new FileReader();
+    reader.onload = e => {
+      uploadedImgs.push(e.target.result);
+      renderPreviews();
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+function renderPreviews() {
+  const c = document.getElementById('imgPreviews');
+  c.innerHTML = uploadedImgs.map((src,i) => `
+    <div class="img-preview-wrap">
+      <img class="img-preview" src="${src}" alt="preview">
+      <button class="img-remove" onclick="removeImg(${i})">✕</button>
+    </div>`).join('');
+}
+
+function removeImg(i) {
+  uploadedImgs.splice(i,1);
+  renderPreviews();
+}
+
+function submitListing() {
+  const title = document.getElementById('fTitle').value.trim();
+  const type  = document.getElementById('fType').value;
+  const list  = document.getElementById('fListing').value;
+  const price = parseFloat(document.getElementById('fPrice').value);
+  const state = document.getElementById('fState').value;
+  const city  = document.getElementById('fCity').value.trim();
+  const name  = document.getElementById('fName').value.trim();
+  const phone = document.getElementById('fPhone').value.trim();
+
+  if(!title||!type||!list||!price||!state||!city||!name||!phone) {
+    showToast('⚠ Please fill all required fields');
+    return;
+  }
+
+  const newProp = {
+    id: 'p' + Date.now(),
+    title, type, listing: list,
+    price,
+    state, city,
+    address: document.getElementById('fAddress').value.trim(),
+    beds: parseInt(document.getElementById('fBeds').value) || 0,
+    baths: parseInt(document.getElementById('fBaths').value) || 0,
+    parking: parseInt(document.getElementById('fParking').value) || 0,
+    size: parseInt(document.getElementById('fSize').value) || 0,
+    desc: document.getElementById('fDesc').value.trim(),
+    amenities: Array.from(checkedAmenities),
+    name, phone,
+    email: document.getElementById('fEmail').value.trim(),
+    imgs: [...uploadedImgs],
+    isNew: true, saved: false,
+    date: new Date().toISOString()
+  };
+
+  properties.unshift(newProp);
+  saveProps();
+  renderGrid();
+  closePostModal();
+  showToast('🎉 Your property is now live!');
+
+  currentFilter = 'all';
+  document.querySelectorAll('.filter-tab').forEach((t,i) => t.classList.toggle('active', i===0));
+  document.getElementById('listings').scrollIntoView({behavior:'smooth'});
+}
+
+// ─── TOAST ───────────────────────────────────────────────
+let toastTimer;
+function showToast(msg) {
+  clearTimeout(toastTimer);
+  document.getElementById('toastMsg').textContent = msg;
+  document.getElementById('toast').classList.add('show');
+  toastTimer = setTimeout(() => document.getElementById('toast').classList.remove('show'), 3500);
+}
+function closeToast() { document.getElementById('toast').classList.remove('show'); }
+
+// ─── NAV SCROLL ──────────────────────────────────────────
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// ─── CLOSE MODALS ON BG CLICK ───────────────────────────
+document.getElementById('postModal').addEventListener('click', e => {
+  if(e.target === document.getElementById('postModal')) closePostModal();
+});
+document.getElementById('detailModal').addEventListener('click', e => {
+  if(e.target === document.getElementById('detailModal')) closeDetailModal();
+});
+
+// ─── SCROLL REVEAL ───────────────────────────────────────
+const observer = new IntersectionObserver(entries => {
+  entries.forEach((en, i) => {
+    if(en.isIntersecting) {
+      setTimeout(() => en.target.classList.add('visible'), i * 80);
+      observer.unobserve(en.target);
+    }
+  });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// ─── COUNTER ANIMATION ───────────────────────────────────
+function animCount(el, target) {
+  let v = 0; const step = Math.ceil(target / 40);
+  const t = setInterval(() => {
+    v = Math.min(v + step, target);
+    el.innerHTML = v + '<span>+</span>';
+    if(v >= target) clearInterval(t);
+  }, 30);
+}
+setTimeout(() => {
+  animCount(document.getElementById('statListings'), properties.length);
+}, 600);
+
+// ─── INIT ────────────────────────────────────────────────
+renderGrid();
+</script>
+</body>
+</html>
